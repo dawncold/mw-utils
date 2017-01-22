@@ -1,16 +1,7 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals, print_function, division
-import sys
 import re
 import common
-
-
-def get_filename():
-    arguments = sys.argv
-    if len(arguments) < 2:
-        print('please provide filename!')
-        exit(-1)
-    return sys.argv[1]
 
 
 def normalize_sheet_names(sheet_names):
@@ -57,14 +48,16 @@ def normalize_sheet_names(sheet_names):
 
 
 def main():
-    filename = get_filename()
+    filename = common.get_filename()
     workbook = common.get_workbook(filename)
-    names = normalize_sheet_names(workbook.get_sheet_names())
+    names = normalize_sheet_names(common.get_sheet_names(workbook))
     old_name2new = {}
     for name in names:
         old_name2new.setdefault(name['old_name'], '{} {} {} {}'.format(name['code_name'], name['real_name'], name['module'], name['os']))
-    for worksheet in workbook.worksheets:
-        worksheet.title = old_name2new[worksheet.title]
-    workbook.save(filename)
+    for worksheet in common.list_worksheets(workbook):
+        common.set_worksheet_name(worksheet, old_name2new[worksheet.title])
+    common.save_workbook(workbook, filename)
+
+
 if __name__ == '__main__':
     main()

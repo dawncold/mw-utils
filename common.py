@@ -1,14 +1,20 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals, print_function, division
-import zipfile
-import openpyxl
+import sys
+from common_openpyxl import *
 
 
-def get_workbook(filename, read_only=False):
-    try:
-        workbook = openpyxl.load_workbook(filename, read_only=read_only)
-    except zipfile.BadZipfile:
-        print('File is not an valid Microsoft Office xlsx file, please convert it to xlsx file!')
+def get_filename():
+    arguments = sys.argv
+    if len(arguments) < 2:
+        print('please provide filename!')
         exit(-1)
-    else:
-        return workbook
+    return sys.argv[1]
+
+
+def get_export_and_dest_filename():
+    arguments = sys.argv
+    if len(arguments) < 3:
+        print('please provide export filename and dest filename!')
+        exit(-1)
+    return sys.argv[1], sys.argv[2]

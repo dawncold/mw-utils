@@ -1,17 +1,8 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals, print_function, division
-import sys
 from copy import copy
 import common
 import process_export
-
-
-def get_export_and_dest_filename():
-    arguments = sys.argv
-    if len(arguments) < 3:
-        print('please provide export filename and dest filename!')
-        exit(-1)
-    return sys.argv[1], sys.argv[2]
 
 
 def copy_style_to_new(old_cell, new_cell):
@@ -73,7 +64,7 @@ def write_to_dest(dest_workbook, data):
 
 
 def main():
-    export_filename, dest_filename = get_export_and_dest_filename()
+    export_filename, dest_filename = common.get_export_and_dest_filename()
     export_workbook = common.get_workbook(export_filename, read_only=True)
     export_data = process_export.group_by_line_key(process_export.read_lines_from_worksheet(export_workbook.active))
     dest_workbook = common.get_workbook(dest_filename)

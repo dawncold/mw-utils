@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals, print_function, division
-import sys
 from datetime import datetime
 from pprint import pprint
 import common
@@ -18,14 +17,6 @@ RETRIEVE_COLUMNS = {
 
 def get_data_key(code_name, module, os):
     return '{}:{}@{}'.format(code_name, module, os)
-
-
-def get_filename():
-    arguments = sys.argv
-    if len(arguments) < 2:
-        print('please provide filename!')
-        exit(-1)
-    return sys.argv[1]
 
 
 def read_lines_from_worksheet(worksheet):
@@ -54,7 +45,7 @@ def group_by_line_key(lines):
 
 
 def main():
-    filename = get_filename()
+    filename = common.get_filename()
     workbook = common.get_workbook(filename)
     print(workbook.get_sheet_names())
     worksheets = workbook.worksheets
