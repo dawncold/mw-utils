@@ -19,8 +19,8 @@ def write_to_hybrid_worksheet(worksheet, max_row, lines):
     for i, line in enumerate(lines, start=1):
         worksheet['E{}'.format(max_row + i)] = line['da']
         worksheet['F{}'.format(max_row + i)] = line['di']
-        worksheet['G{}'.format(max_row + i)] = '=G{}+F{}'.format(max_row, max_row + i)
-        print('add new line: {},{},{} to {}'.format(line['da'], line['di'], '=G{}+F{}'.format(max_row, max_row + i), worksheet.title))
+        worksheet['G{}'.format(max_row + i)] = '=G{}+F{}'.format(max_row + i - 1, max_row + i)
+        print('add new line: {},{},{} to {}'.format(line['da'], line['di'], '=G{}+F{}'.format(max_row + i - 1, max_row + i), worksheet.title))
         copy_style_to_new(worksheet['E{}'.format(max_row)], worksheet['E{}'.format(max_row + i)])
         copy_style_to_new(worksheet['F{}'.format(max_row)], worksheet['F{}'.format(max_row + i)])
         copy_style_to_new(worksheet['G{}'.format(max_row)], worksheet['G{}'.format(max_row + i)])
@@ -31,8 +31,8 @@ def write_to_worksheet(worksheet, max_row, lines):
         worksheet['A{}'.format(max_row + i)] = line['date'].strftime('%Y/%m/%d')
         worksheet['B{}'.format(max_row + i)] = line['da']
         worksheet['C{}'.format(max_row + i)] = line['di']
-        worksheet['D{}'.format(max_row + i)] = '=D{}+C{}'.format(max_row, max_row + 1)
-        print('add new line: {},{},{},{} to {}'.format(line['date'].strftime('%Y/%m/%d'), line['da'], line['di'], '=D{}+C{}'.format(max_row, max_row + 1), worksheet.title))
+        worksheet['D{}'.format(max_row + i)] = '=D{}+C{}'.format(max_row + i - 1, max_row + i)
+        print('add new line: {},{},{},{} to {}'.format(line['date'].strftime('%Y/%m/%d'), line['da'], line['di'], '=D{}+C{}'.format(max_row + i - 1, max_row + i), worksheet.title))
         copy_style_to_new(worksheet['A{}'.format(max_row)], worksheet['A{}'.format(max_row + i)])
         copy_style_to_new(worksheet['B{}'.format(max_row)], worksheet['B{}'.format(max_row + i)])
         copy_style_to_new(worksheet['C{}'.format(max_row)], worksheet['C{}'.format(max_row + i)])
