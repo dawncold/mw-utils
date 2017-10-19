@@ -51,7 +51,7 @@ def calculate_avg_and_sum(data_sheet, days):
 
 
 def main():
-    file_path = sys.argv[1]
+    file_path = sys.argv[1].decode('UTF-8')
 
     with open(file_path, 'rb') as f:
         book = xlrd.open_workbook(file_contents=mmap(f.fileno(), 0, access=ACCESS_READ))
